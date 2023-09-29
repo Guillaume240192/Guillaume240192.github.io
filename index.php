@@ -9,6 +9,10 @@
     <script src="script2.js" defer></script>
 </head>
 <body> 
+
+<?php  $fichier = fopen('exemple2.txt', 'c+b');
+
+?>
         <div>
         <!--  formulaire -->
             <form>
