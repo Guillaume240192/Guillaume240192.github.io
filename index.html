@@ -5,14 +5,83 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
- 
+    <link rel="stylesheet" href="style.css">
+    <script src="script2.js" defer></script>
 </head>
 <body> 
+        <div>
+        <!--  formulaire -->
+            <form>
+                <p>
+                    <label for="avatar">Nom</label>
+                    <input type="text" id="avatar" name="avatar" value="Bernard" >
+                </p>
+                <p>
+                    <label for="age">Age</label>
+                    <input type="text" id="age" name="age" value="42" >
+                </p>
+                <p>
+                    <label for="trait">Caractère</label>
+                    <select id="trait">
+                        <option value="1">Fort et agoraphobe</option>
+                        <option value="2">inquièt et craintif</option>
+                        <option value="3" select="selected">Avare et furtif</option>
+                        <option value="4">triste et medium</option>
+                    </select>
+                </p>
+                
+            
+                <!-- <input type="submit" value="Envoyer"> -->
+            </form>
+        </div>
 
-<h1> COURS GITHUB</h1>
-<h2>version 2</h2>
-<p>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus id natus dolorum totam deserunt eligendi reprehenderit nemo fuga laudantium est facere et delectus voluptatum rem quos, error temporibus labore voluptatibus.
-</p>
+        <div>
+            <button type="button" id="play">Lancer</button>
+        </div>
+
+        <div>
+            <p>Recopie la liste de mots le plus rapidement. A chaque mot tapé, valide le mot en pressant la touche ENTREE ! </p>
+            <p id="presentation">ZONE AFFICHAGE</p>
+        </div>
+        <div>
+            <input type="text" id="name" name="name"  size="20"/> <!--  Zone de saisie -->
+            
+        </div>
+
+        <div id="divTable">
+            <table border="2" id="table">
+                <tr>
+                    <th>Nom</th>
+                    <th>Age</th>
+                    <th>Score /10</th>
+                    <th>Temps</th>
+                    <th>Caractère</th>
+                </tr>
+            </table>
+        </div>
+
+
+        <div>
+            <p id="scoreFinal"> </p> <!--  message final -->
+            <div id="d1">  <!--  div contenant gif1 -->
+                <iframe src="https://giphy.com/embed/u03ahOT8hXFUGYaZ1n" width="200" height="200" frameBorder="1" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/Toskonaut-tommy-toskonaut-u03ahOT8hXFUGYaZ1n"></a></p>
+            </div>
+            <div id="d2">  <!--  div contenant gif2 -->
+                <iframe src="https://giphy.com/embed/o75ajIFH0QnQC3nCeD" width="200" height="200" frameBorder="3" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/theoffice-o75ajIFH0QnQC3nCeD"></a></p>
+            </div>
+            
+        </div>
+
+
+
+
 </body>
 </html>
+
+           <!--  <button type="button" id="erase">Effacer</button> 
+            <select id="choice">
+                <option value="red">Rouge</option>
+                <option value="green">Vert</option>
+                <option value="blue" select="selected">Bleu</option>
+                <option value="black">Noir</option>
+            </select>  -->
