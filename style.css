@@ -1,66 +1,126 @@
-:root{
-    --width : 320px;
-    --height : 160px;
-    --dark : #2b2b2b;
-    --light : rgb(216, 215, 215);
-
+:root {
+    --boxColor : #0ff7;
+    --rotateSpeed : 30s;
+    --bounceSpeed : 1.5s;
 }
 
-* {
-    margin: 0;
-    padding : 0;
-    box-sizing: border-box;
-
-}
 body {
+    background-color: #000;
+    min-height: 100vh;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: var(--dark);
-    transition: 0.5s;
-}
-body.active {
-    background: var(--light);
-}
-#toggle {
-    position: relative;
-    display: block;
-    width: var(--width);
-    height: var(--height);
-    border-radius: var(--height);
-    background: #222;
-    transition: 0.5s;
-    cursor: pointer;
-    box-shadow: inset 0 8px 60px rgba(0,0,0,0.1),
-                inset 0 8px 8px rgba(0,0,0,0.1),
-                inset 0 -4px 4px rgba(0,0,0,0.1);
-}
-#toggle.active {
-    background-color: var(--light);
-    box-shadow: inset 0 2px 60px rgba(0,0,0,0.1),
-                inset 0 2px 8px rgba(0,0,0,0.1),
-                inset 0 -4px 4px rgba(0,0,0,0.05);
-}
-#toggle .indicator {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: var(--height);
-    height: var(--height);
-    
-    border-radius: 50%;
-    transform: scale(0.9);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.5),
-                inset 0 4px 4px rgba(255,255,255,0.2),
-                inset 0 -4px 4px rgba(255,255,255,0.2);
-    transition: 0.5s;
+    font-size: 75px;
+    perspective: 10em;
+    perspective-origin: 50% calc(50% - 3em);
 }
 
-#toggle.active .indicator {
-    left: var(--height);
-    background: linear-gradient(to bottom, var(--light), var(--light));
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2),
-                inset 0 4px 4px rgba(235,235,235,1),
-                inset 0 -4px 4px rgba(235,235,235,0.7);
+.scene {
+    position: relative;
+    transform-style: preserve-3d ;
+    transform: rotateX(360deg) 30s;
+    animation: sceneRotate var(--rotateSpeed) infinite linear;
+}
+@keyframes sceneRotate {
+    to {transform: rotateY(360deg);}
+}
+.ball {
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background: lightblue;
+
+    position: absolute;   
+    left : -0.5em;
+    bottom: 1em; 
+    background-image: radial-gradient(
+        circle at top,
+        lightblue,
+        #000
+    );
+    animation: 
+    ballBounce var(--bounceSpeed) infinite ease-out,
+    sceneRotate var(--rotateSpeed) infinite linear reverse;
+}
+@keyframes ballBounce {
+    0%, 100% {bottom: 0.5em;}
+    50% {bottom: 3em; animation-timing-function: ease-in;}
+    
+}
+.ballShadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(#0007, #0000 50%);
+    animation: ballShadow var(--bounceSpeed) infinite ease-out;
+}
+@keyframes ballShadow {
+    0%, 8%, 93.5%, 100% {transform: scale(1); opacity: 1;}
+    50% {transform: scale(2); opacity: 0.5; animation-timing-function: ease-in;}
+}
+.cube {
+    width: 2em;
+    height: 2em;
+    transform-style: preserve-3d ;
+    position: absolute;
+    bottom : -1em; 
+    left : -1em;
+    animation: cubeHeight var(--bounceSpeed) infinite ease-out;
+}
+@keyframes cubeHeight {
+    0%, 100% {height: 1.5em;}
+    8%, 93.5% { height: 2em;}
+}
+.left, .right, .front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--boxColor);
+    box-shadow: 0 0 0.5em #000a inset ;
+}
+.front {
+    transform: translateZ(1em);
+}
+.right {
+    transform: rotateY(90deg) translateZ(1em);
+}
+.back {
+    transform: rotateY(180deg) translateZ(1em) ;
+}
+.left {
+    transform: rotateY(270deg) translateZ(1em);
+}
+.top {
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    background: var(--boxColor);
+    transform: translateY(-50%) rotateX(90deg);
+    box-shadow: 0  0 0.5em #000a inset ;
+}
+.bottom {
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    background: var(--boxColor);
+    bottom : 0;
+    transform: translateY(50%) rotateX(90deg);
+    box-shadow: 0 0 0.5em #000;
+}
+
+.floor {
+    width: 15em;
+    height: 15em;
+    background-image: 
+    radial-gradient(#0000, #000 75%),
+    repeating-conic-gradient(from 45deg, #111 0deg 90deg, #222 90deg 180deg) ;
+    background-size:100%, 1em 1em;
+
+    position: absolute;
+    top : 1em;
+    transform: translate(-50%, -50%) rotateX(90deg);
+
+    
+
 }
