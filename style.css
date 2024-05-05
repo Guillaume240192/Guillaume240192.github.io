@@ -1,126 +1,220 @@
 :root {
-    --boxColor : #0ff7;
-    --rotateSpeed : 30s;
-    --bounceSpeed : 1.5s;
+    --RotationAngle2deg : 2deg;
+    --RotationAngle-2deg : -2deg;
+    --RotationAngle1deg : 1deg;
+    --RotationAngle-1deg : -1deg;
+    --RotationAngle0_5deg : 0.5deg;
+    --RotationAngle-0_5deg : -0.5deg;
+    --RotationAngle1_5deg : 1.5deg;
+    --RotationAngle-1_5deg : -1.5deg;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+}
 body {
-    background-color: #000;
-    min-height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 75px;
-    perspective: 10em;
-    perspective-origin: 50% calc(50% - 3em);
+    padding: 0.5rem;
+    box-sizing: border-box;
+    font-family: "Comic Neue";
+    background-image: url(/images/wallpaper3.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.container { 
+    box-sizing: inherit;
+    display : flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 0.5rem;
+    /*border: 1px solid brown;*/
+}
+.block {
+    width: 188px;
+    height: 250px;
+    background-color: #eadd94;
+    font-family: 'Bangers', cursive;
+    border: solid black;
+    cursor: pointer;
+}
+.block:hover {
+    background-color: #efd962;
+    box-shadow: 0px 0px 8px black;
 }
 
-.scene {
-    position: relative;
-    transform-style: preserve-3d ;
-    transform: rotateX(360deg) 30s;
-    animation: sceneRotate var(--rotateSpeed) infinite linear;
+#overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
 }
-@keyframes sceneRotate {
-    to {transform: rotateY(360deg);}
+#modal {
+    display: none; 
+    position: fixed;
+    width: 50%;
+    height: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff; 
+    z-index: 3;
 }
-.ball {
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    background: lightblue;
+    #mainTable_div {
+        width: 100%;
+    }
+        .headerRowCss {
+            text-align: left;
+        }
+        .rowNumberCellCss {
+            width: 30px;
+        }
+        .selectForm {
+            width: 100%;
+        }
+        .crown {
+            width : 20px;
+            height: 20px;
+            background-image: url(/images/crown.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
 
-    position: absolute;   
-    left : -0.5em;
-    bottom: 1em; 
-    background-image: radial-gradient(
-        circle at top,
-        lightblue,
-        #000
-    );
-    animation: 
-    ballBounce var(--bounceSpeed) infinite ease-out,
-    sceneRotate var(--rotateSpeed) infinite linear reverse;
-}
-@keyframes ballBounce {
-    0%, 100% {bottom: 0.5em;}
-    50% {bottom: 3em; animation-timing-function: ease-in;}
+
+
+
+
+
+
+        .face {
+            margin: auto;
+            margin-top: 20px;
+            width : 125px;
+            aspect-ratio: 1;
+            border-color: black;
+            border-width: 3px 3px 2px 4px;
+            border-style: solid;
+            border-radius: 56% 44% 43% 57% / 49% 55% 45% 51%;
+            background-image: url(/images/thierryI.png);
+            background-color: #ffffff;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            /*box-shadow: 0px 0px 3px black;*/
+        }
+        .face1 {
+            border-width: 2px 3px 4px 3px;
+            border-radius: 58% 42% 56% 44% / 52% 61% 39% 48% 
+        }
+        .name {
+            margin: auto;
+            margin-top: 7px;
+            width: 100px;
+            border-bottom: 3px solid black;
+            text-align: center;
+            font-size: 1.875rem;
+        }
+        .blockHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /*border: 1px solid black;*/
+            margin: 0.3rem;
+        }
+        .crown2 {
+            width : 25px;
+            aspect-ratio: 1;
+            background-image: url(/images/crown3.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .livePeriod {
+            font-size: 0.9rem; 
+            margin-right: 0.2rem;
+        }
+
+/*
+.block5 {
+    padding: 0.5rem;
+    padding-bottom: 1rem;
+    /*border: 1px solid black;
+    background-color: antiquewhite;
+    grid-area: 3 / 1 / 4 / 3;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(1500, 1fr);
     
 }
-.ballShadow {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(#0007, #0000 50%);
-    animation: ballShadow var(--bounceSpeed) infinite ease-out;
+    #scale {
+        /*background-color: rgba(255, 0, 0, 0.086);
+        border-bottom: 1px solid black;
+        grid-area: 1 / 1 / 2 / 1501;
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: repeat(1500, 1fr);
+        
+    }
+    #reign {
+        display: none;
+        background-color: #1B66EB;
+    }
+
+ 
+*/
+
+
+.box1{
+  border-width: 3px 4px 3px 5px;
+  border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+  transform: rotate(var(--RotationAngle2deg));
 }
-@keyframes ballShadow {
-    0%, 8%, 93.5%, 100% {transform: scale(1); opacity: 1;}
-    50% {transform: scale(2); opacity: 0.5; animation-timing-function: ease-in;}
+.box1 > *:not(.name) {
+    transform: rotate(calc(-1*var(--RotationAngle2deg))); 
 }
-.cube {
-    width: 2em;
-    height: 2em;
-    transform-style: preserve-3d ;
-    position: absolute;
-    bottom : -1em; 
-    left : -1em;
-    animation: cubeHeight var(--bounceSpeed) infinite ease-out;
+.box2{
+  border-width: 3px 3px 5px 5px;
+  border-radius: 4% 95% 6% 95%/95% 4% 92% 5%;
+  transform: rotate(var(--RotationAngle-2deg));
 }
-@keyframes cubeHeight {
-    0%, 100% {height: 1.5em;}
-    8%, 93.5% { height: 2em;}
-}
-.left, .right, .front, .back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: var(--boxColor);
-    box-shadow: 0 0 0.5em #000a inset ;
-}
-.front {
-    transform: translateZ(1em);
-}
-.right {
-    transform: rotateY(90deg) translateZ(1em);
-}
-.back {
-    transform: rotateY(180deg) translateZ(1em) ;
-}
-.left {
-    transform: rotateY(270deg) translateZ(1em);
-}
-.top {
-    position: absolute;
-    width: 2em;
-    height: 2em;
-    background: var(--boxColor);
-    transform: translateY(-50%) rotateX(90deg);
-    box-shadow: 0  0 0.5em #000a inset ;
-}
-.bottom {
-    position: absolute;
-    width: 2em;
-    height: 2em;
-    background: var(--boxColor);
-    bottom : 0;
-    transform: translateY(50%) rotateX(90deg);
-    box-shadow: 0 0 0.5em #000;
+.box2 > *:not(.name) {
+    transform: rotate(calc(-1*var(--RotationAngle-2deg))); 
 }
 
-.floor {
-    width: 15em;
-    height: 15em;
-    background-image: 
-    radial-gradient(#0000, #000 75%),
-    repeating-conic-gradient(from 45deg, #111 0deg 90deg, #222 90deg 180deg) ;
-    background-size:100%, 1em 1em;
-
-    position: absolute;
-    top : 1em;
-    transform: translate(-50%, -50%) rotateX(90deg);
-
-    
-
+.box3{
+  border-width: 5px 3px 3px 5px;
+  border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
+  transform: rotate(2deg);
 }
+
+.box4{
+    border-width: 3px 5px 4px 3px;
+    border-radius:94% 5% 96% 6%/2% 97% 5% 35%;
+    transform: rotate(0.5deg);
+  }
+
+  .box5{
+    border-width: 4px 4px 3px 3px;
+    border-radius:95% 4% 92% 5%/4% 95% 6% 95%;
+    transform: rotate(1.5deg);
+  }
+
+  .box6{
+    border-width: 2px 3px 3px 4px;
+    border-radius:5% 96% 5% 94%/96% 5% 91% 4%;
+    transform: rotate(-0.5deg);
+  }
+
+  .box7{
+    border-width: 4px 3px 4px 5px;
+    border-radius:3% 94% 5% 94%/94% 3% 91% 4%;
+    transform: rotate(-1.5deg);
+  }

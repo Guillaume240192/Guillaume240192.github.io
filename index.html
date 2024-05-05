@@ -2,25 +2,69 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Cube animation</title>  
+    <title>Kings</title>  
     <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> 
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> 
+
+    <!-- google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+
+
 </head>
 <body> 
-    <div class="scene">
-        <div class="floor"></div>
-        <div class="cube">
-            <div class="front"></div>
-            <div class="back"></div>
-            <div class="left"></div>
-            <div class="right"></div>
-            <div class="top">
-                <div class="ballShadow"></div>
+    <div id="overlay"></div>
+    <div id="modal"><div id="mainTable_div"></div></div>
+    <div class="container">
+        <div class="block box1">
+            <div class="blockHeader">
+                <div class="crown2"></div>
+                <div class="livePeriod">465 - 511 (48ans)</div>
             </div>
-            <div class="bottom"></div>
+            <div class="face"></div>
+            <div class="name">Clovis</div>
         </div>
-        <div class="ball"></div>
+        <div class="block box2">
+            <div class="blockHeader">
+                <div class="crown2"></div>
+                <div class="livePeriod">465 - 511 </div>
+            </div>
+            <div class="face face1"></div>
+            <div class="name">Thierry</div>
+        </div>
+        <div class="block box3">
+            <div class="blockHeader">
+                <div class="crown2"></div>
+                <div class="livePeriod">465 - 511</div>
+            </div>
+            <div class="face"></div>
+        </div>
+        <div class="block box box4"></div>
+        <div class="block box box5"></div>
+        <div class="block box box6"></div>
+        <div class="block box box7"></div>
     </div>
 
-    <script src="app.js" charset="UTF-8"></script>
+    
+    <!-- google charts Table-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <script type="module" src="app.js" charset="UTF-8"></script>
 </body>
 </html>
+
+<!-- 
+        <div class="block1">
+        </div>
+        <div class="block2">
+            <div class="face"></div>
+            <button id="myBtn" type="button"> overlay !</button>
+        </div>
+        <div class="block5">
+            <div id="scale"></div>
+            <div id="reign"></div>
+        </div>
+-->
