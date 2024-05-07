@@ -20,6 +20,8 @@ class Character {
       this.age = livePeriod[1] - livePeriod[0];
     }
   } 
+
+//////////////////// CLOVIS I ///////////////////////
 const clovisI = new Character({ 
     sexe: 'm',
     heir: true,
@@ -29,9 +31,6 @@ const clovisI = new Character({
                 ], 
     family: [ {role: 'father', name: 'Childéric I', sexe: 'm'},
               {role: 'mother', name: 'Basine de Thuringe', sexe: 'f'},
-              {role: 'sibling', name: 'Audoflède', sexe: 'f'},
-              {role: 'sibling', name: 'Lanthilde', sexe: 'f'},
-              {role: 'sibling', name: 'Alboflède', sexe: 'f'},
               {role: 'spouse', name: 'Evochilde', sexe: 'f'},
               {role: 'spouse', name: 'Clotilde', sexe: 'f'},
               {role: 'issue', name: 'Thierry I', sexe: 'm', heir: true},
@@ -44,15 +43,35 @@ const clovisI = new Character({
     title: {id:'king', label:''},
     dynasty: {id:'merovingian', label: 'Merovingiens'},
     religion: {id: 'christianism', label: 'Chrétiens'},
-    avatar: '/images/clovis.png',
+    avatar: '/images/clovisI.png',
     death: {location: 'Paris', cause: 'Maladie'},
     birth: {location: 'Tournai'}
   })
+//////////////////// THIERRY I ///////////////////////
+const thierryI = new Character({ 
+  sexe: 'm',
+  heir: true,
+  name: 'Thierry 1<sup style="font-size:0.9rem;margin-left:2px">er</sup>', 
+  livePeriod: [485, 534],
+  reignPeriod: [{title: "Roi de Reims", date: [511, 534]},
+                {title: "Roi d'Orléans 1/3", date: [524, 534]},
+              ], 
+  family: [ {role: 'father', name: 'Clovis', sexe: 'm'},
+            {role: 'mother', name: 'Evochilde', sexe: 'f'},
+            {role: 'spouse', name: 'Suavegothe', sexe: 'f'},
+            {role: 'issue', name: 'Thibert I', sexe: 'm', heir: true},
+            {role: 'issue', name: 'Théodechilde', sexe: 'f', heir: false},
+          ],
+  title: {id:'king', label:''},
+  dynasty: {id:'merovingian', label: 'Merovingiens'},
+  religion: {id: 'christianism', label: 'Chrétiens'},
+  avatar: '/images/thierryI.png',
+  death: {location: 'Paris', cause: 'Maladie'},
+  birth: {location: 'Tournai'}
+})
+
 const characters = [
-  clovisI,
-  clovisI,
-  clovisI,
-  clovisI,
+  clovisI,thierryI,
 ];
 
 

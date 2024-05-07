@@ -2,6 +2,10 @@ import {characters} from "/characters.js";
 import {parameters} from "/parameters.js";
 
 
+function playAudio() {
+  var audio = document.getElementById("mouse-click");
+  audio.play();
+}
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
@@ -25,16 +29,19 @@ function createBlock(char,id) {
   const title = document.createElement('div');
   title.classList.add('title');
   title.style.backgroundImage = `url(${parameters.titleIcon[char.title.id]})`;
+  char.reignPeriod.forEach((el) => {title.title += `${el.title}\u000d`;})
 
   // DYNASTY DIV
   const dynasty = document.createElement('div');
   dynasty.classList.add('dynasty');
   dynasty.style.backgroundImage = `url(${parameters.dynastyIcon[char.dynasty.id]})`;
+  dynasty.title = char.dynasty.label;
 
   // RELIGION DIV
   const religion = document.createElement('div');
   religion.classList.add('religion');
   religion.style.backgroundImage = `url(${parameters.religionIcon[char.religion.id]})`;
+  religion.title = char.religion.label;
   
   // AGE DIV
   const age = document.createElement('div');
@@ -51,7 +58,8 @@ function createBlock(char,id) {
   // NAME DIV
   const name = document.createElement('div');
   name.classList.add('name');
-  name.innerText = char.name;
+  name.innerHTML = char.name;
+
 
   // LIVEPERIOD DIV
   const livePeriod = document.createElement('div');
@@ -73,7 +81,7 @@ function createBlock(char,id) {
   container.appendChild(block);
 
   // inverse rotation for some divs
-  const divs = document.querySelectorAll(`[data-id='${block.dataset.id}']`)[0].querySelectorAll("*:not(.name):not(.title):not(.dynasty):not(.religion)");
+  const divs = document.querySelectorAll(`[data-id='${block.dataset.id}']`)[0].querySelectorAll("*:not(.name):not(.title):not(.dynasty):not(.religion):not(.age)");
   divs.forEach((el) => {el.style.transform = `rotate(${-1*param.rotationAngle+'deg'})`;})
   //console.log(divs)
 }
@@ -95,7 +103,7 @@ characters.forEach((char,i) => {createBlock(char,i)});
 
 
 //-----  OVERLAY
-function overlay() {
+function _overlay(id) {
   const overlay_div = document.getElementById("overlay");
   const modal_div = document.getElementById("modal");
 
@@ -106,9 +114,17 @@ function overlay() {
     overlay_div.style.display = "block";
     modal_div.style.display = "block";
   }
+  console.log(id)
+  playAudio();
 }
-document.querySelectorAll('.block').forEach((el) => el.addEventListener('click', overlay));
-document.getElementById("overlay").addEventListener('click', overlay);
+
+document.querySelectorAll('.block').forEach((el) => el.addEventListener('click', function () {
+  _overlay(this.dataset.id);
+  console.log(characters[this.dataset.id].name+'selected')
+}));
+document.getElementById('overlay').addEventListener('click', function () {
+  _overlay()
+});
 
 //----- GOOGLE TABLE IN OVERLAY
 google.charts.load('current', { 'packages': ['corechart', 'table'], 'language': 'fr' });
