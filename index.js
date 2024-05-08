@@ -1,7 +1,7 @@
 import {characters} from "/characters.js";
 import {parameters} from "/parameters.js";
 
-
+// ------ CONTAINER -------
 function playAudio() {
   var audio = document.getElementById("mouse-click");
   audio.play();
@@ -13,7 +13,7 @@ function createBlock(char,id) {
   var randomNb = getRandomInt(10);
   var param = parameters.boxes[randomNb];
 
-    // BLOCK DIV
+  // BLOCK DIV
   const block = document.createElement('div');
   block.classList.add('block');
   block.dataset.id = id; //set id to the block (equal to index of characters array)
@@ -29,7 +29,26 @@ function createBlock(char,id) {
   const title = document.createElement('div');
   title.classList.add('title');
   title.style.backgroundImage = `url(${parameters.titleIcon[char.title.id]})`;
-  char.reignPeriod.forEach((el) => {title.title += `${el.title}\u000d`;})
+  title.style.position = 'relative';
+  char.reignPeriod.forEach((el) => {title.title += `${el.title} [${el.date[0]} - ${el.date[1]}]\u000d`;})
+   /*   const reignMap = document.createElement('div')
+      reignMap.classList.add('reignMap');
+      reignMap.style.width = '300px';
+      reignMap.style.height = '200px';
+      reignMap.style.backgroundColor = 'rgba(0,0,0,0.5)';
+      reignMap.style.position = 'absolute';
+      reignMap.style.backgroundImage = `url("/images/mapClovis.png")`;
+      console.log(reignMap)
+  title.addEventListener('click',function(e) {
+    e.stopPropagation();
+    reignMap.style.display = 'block';
+  });
+  title.addEventListener('mouseleave',function(e) {
+    e.stopPropagation();
+    reignMap.style.display = 'none';
+  });
+  
+  title.appendChild(reignMap);*/
 
   // DYNASTY DIV
   const dynasty = document.createElement('div');
@@ -66,9 +85,7 @@ function createBlock(char,id) {
   livePeriod.classList.add('livePeriod');
   livePeriod.innerText = `${char.livePeriod[0]} - ${char.livePeriod[1]}`;
 
-
-
-  
+  // ADDING BLOCK IN CONTAINER
   const container = document.querySelector('.container');
   blockHeader.appendChild(title);
   blockHeader.appendChild(dynasty);
@@ -81,7 +98,7 @@ function createBlock(char,id) {
   container.appendChild(block);
 
   // inverse rotation for some divs
-  const divs = document.querySelectorAll(`[data-id='${block.dataset.id}']`)[0].querySelectorAll("*:not(.name):not(.title):not(.dynasty):not(.religion):not(.age)");
+  const divs = document.querySelectorAll(`[data-id='${block.dataset.id}']`)[0].querySelectorAll("*:not(.name):not(.title):not(.dynasty):not(.religion):not(.age):not(.reignMap)");
   divs.forEach((el) => {el.style.transform = `rotate(${-1*param.rotationAngle+'deg'})`;})
   //console.log(divs)
 }
@@ -92,17 +109,7 @@ characters.forEach((char,i) => {createBlock(char,i)});
 
 
 
-
-
-
-
-
-
-
-
-
-
-//-----  OVERLAY
+// ------  OVERLAY ------
 function _overlay(id) {
   const overlay_div = document.getElementById("overlay");
   const modal_div = document.getElementById("modal");
@@ -114,17 +121,17 @@ function _overlay(id) {
     overlay_div.style.display = "block";
     modal_div.style.display = "block";
   }
-  console.log(id)
+  //console.log(id)
   playAudio();
 }
 
 document.querySelectorAll('.block').forEach((el) => el.addEventListener('click', function () {
   _overlay(this.dataset.id);
-  console.log(characters[this.dataset.id].name+'selected')
 }));
-document.getElementById('overlay').addEventListener('click', function () {
+document.querySelector('.cross').addEventListener('click', function () {
   _overlay()
 });
+
 
 //----- GOOGLE TABLE IN OVERLAY
 google.charts.load('current', { 'packages': ['corechart', 'table'], 'language': 'fr' });

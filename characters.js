@@ -26,7 +26,7 @@ const clovisI = new Character({
     sexe: 'm',
     heir: true,
     name: 'Clovis', 
-    livePeriod: [465, 511],
+    livePeriod: [466, 511],
     reignPeriod: [{title: 'Roi des Francs', date: [509, 511]},
                 ], 
     family: [ {role: 'father', name: 'Childéric I', sexe: 'm'},
@@ -41,8 +41,8 @@ const clovisI = new Character({
               {role: 'issue', name: 'Clotilde', sexe: 'f', heir: false},
             ],
     title: {id:'king', label:''},
-    dynasty: {id:'merovingian', label: 'Merovingiens'},
-    religion: {id: 'christianism', label: 'Chrétiens'},
+    dynasty: {id:'merovingian', label: 'Mérovingiens'},
+    religion: {id: 'christianism', label: 'Chrétien'},
     avatar: '/images/clovisI.png',
     death: {location: 'Paris', cause: 'Maladie'},
     birth: {location: 'Tournai'}
@@ -63,15 +63,34 @@ const thierryI = new Character({
             {role: 'issue', name: 'Théodechilde', sexe: 'f', heir: false},
           ],
   title: {id:'king', label:''},
-  dynasty: {id:'merovingian', label: 'Merovingiens'},
-  religion: {id: 'christianism', label: 'Chrétiens'},
+  dynasty: {id:'merovingian', label: 'Mérovingiens'},
+  religion: {id: 'christianism', label: 'Chrétien'},
   avatar: '/images/thierryI.png',
-  death: {location: 'Paris', cause: 'Maladie'},
-  birth: {location: 'Tournai'}
+})
+//////////////////// CLODOMIR ///////////////////////
+const clodomir = new Character({ 
+  sexe: 'm',
+  heir: true,
+  name: 'Clodomir', 
+  livePeriod: [495, 524],
+  reignPeriod: [{title: "Roi d'Orléans", date: [511, 524]},
+              ], 
+  family: [ {role: 'father', name: 'Clovis', sexe: 'm'},
+            {role: 'mother', name: 'Clotilde', sexe: 'f'},
+            {role: 'spouse', name: 'Gondioque', sexe: 'f'},
+            {role: 'issue', name: 'Thibaut', sexe: 'm', heir: false},
+            {role: 'issue', name: 'Gontier', sexe: 'm', heir: false},
+            {role: 'issue', name: 'Clodoald', sexe: 'm', heir: false},
+          ],
+  title: {id:'king', label:''},
+  dynasty: {id:'merovingian', label: 'Mérovingiens'},
+  religion: {id: 'christianism', label: 'Chrétien'},
+  avatar: '/images/clodomirI.png',
+  death: {location: 'Vézeronce', cause: 'Guerre contre les Burgondes'},
 })
 
 const characters = [
-  clovisI,thierryI,
+  clovisI,thierryI, clodomir
 ];
 
 
@@ -79,8 +98,6 @@ const characters = [
 export {characters};
 
 /*
-new Character({isKing: true, name: "Clovis", livePeriod: [465, 511], reignPeriod: [509, 511], childNames: ["Thierry Ier", "Clodomir", "Childebert", "Clotaire Ier"], dynasty: "Merovingian", father: "Childéric Ier", mother: "Basina"}),
-new Character({isKing: true, name: "Thierry Ier", livePeriod: [485, 534], reignPeriod: [511, 534], childNames: ["Thibert Ier", "Théodechilde"], dynasty: "Merovingian", father: "Clovis", mother : "Evochilde"}),
 new Character({isKing: false, name: "Charles Martel", livePeriod: [688, 741], reignPeriod: [718, 741], childNames: ["Carloman", "Pépin le Bref", "Hiltrude", "Landrade de Munsterbilzen","Aude de France","Bernard","Griffon","Rothaïde","Jérôme","Remi de Rouen"], dynasty: "Pippinides"}),  
 new Character({isKing: true, name: "Pépin le Bref", livePeriod: [714, 768], reignPeriod: [751, 768], childNames: [ "Charlemagne", "Carloman Ier", "Pépin", "Chrothais","Adélaïde","Gisèle"], dynasty: "Carolingiens"}),
 new Character({isKing: true, name: "Charlemange", livePeriod: [748, 814], reignPeriod: [768, 814], childNames: ["Alpaïs","Pépin le Bossu","Charles le Jeune","Adélaïde","Rotrude","Pépin d'Italie","Louis Ier le Pieux"], dynasty: "Carolingiens"}),*/

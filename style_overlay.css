@@ -9,7 +9,7 @@
     bottom: 0;
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-    cursor: pointer; /* Add a pointer on hover */
+    
 }
 #modal {
     display: none; 
@@ -20,18 +20,36 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #ffffff; 
+    border-style: solid;
+    border-color: black;
+    border-width: 3px 2px 4px 3px;
+    border-radius: 98% 2% 98% 2% / 3% 98% 2% 97%;
     z-index: 3;
 }
-
-#mainTable_div {
-    width: 100%;
-}
-    .headerRowCss {
-        text-align: left;
+    .cross {
+        /*border: 1px solid black;*/
+        width: 20px;
+        aspect-ratio: 1;
+        position: absolute;
+        right: 15px;
+        top: 2px;
+        background-image: url(/images/cross.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer; /* Add a pointer on hover */
     }
-    .rowNumberCellCss {
-        width: 30px;
+    #mainTable_div {
+        display: none;
+        width: 80%;
+        margin: 50px auto 0;
     }
-    .selectForm {
-        width: 100%;
-    }
+        .headerRowCss {
+            text-align: left;
+        }
+        .rowNumberCellCss {
+            width: 30px;
+        }
+        .selectForm {
+            width: 100%;
+        }
