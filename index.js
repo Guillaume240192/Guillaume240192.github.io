@@ -85,6 +85,22 @@ function createBlock(char,id) {
   livePeriod.classList.add('livePeriod');
   livePeriod.innerText = `${char.livePeriod[0]} - ${char.livePeriod[1]}`;
 
+  // blockOverlay DIV
+  const blockOverlay = document.createElement('div');
+  blockOverlay.classList.add('blockOverlay')
+  blockOverlay.style.borderRadius = param.borderRadius;
+  blockOverlay.style.borderWidth = param.borderWidth;
+  blockOverlay.addEventListener('click', function () {
+    _overlay();
+  });
+    // Double Axes DIV
+    const doubleAxes = document.createElement('div');
+    doubleAxes.classList.add('doubleAxes');
+    doubleAxes.style.borderRadius = param.borderRadius;
+    doubleAxes.style.borderWidth = param.borderWidth;
+    doubleAxes.innerHTML = '<div class="fight">combat !<div>';
+
+
   // ADDING BLOCK IN CONTAINER
   const container = document.querySelector('.container');
   blockHeader.appendChild(title);
@@ -95,19 +111,17 @@ function createBlock(char,id) {
   block.appendChild(face);
   block.appendChild(name);
   block.appendChild(livePeriod);
+  blockOverlay.appendChild(doubleAxes);
+  block.appendChild(blockOverlay);
   container.appendChild(block);
 
   // inverse rotation for some divs
-  const divs = document.querySelectorAll(`[data-id='${block.dataset.id}']`)[0].querySelectorAll("*:not(.name):not(.title):not(.dynasty):not(.religion):not(.age):not(.reignMap)");
+  const divs = document.querySelectorAll(`[data-id='${block.dataset.id}']`)[0].querySelectorAll("*:not(.name):not(.title):not(.dynasty):not(.religion):not(.age):not(.reignMap):not(.blockOverlay):not(.doubleAxes)");
   divs.forEach((el) => {el.style.transform = `rotate(${-1*param.rotationAngle+'deg'})`;})
   //console.log(divs)
 }
 
 characters.forEach((char,i) => {createBlock(char,i)});
-
-
-
-
 
 // ------  OVERLAY ------
 function _overlay(id) {
@@ -125,12 +139,50 @@ function _overlay(id) {
   playAudio();
 }
 
-document.querySelectorAll('.block').forEach((el) => el.addEventListener('click', function () {
-  _overlay(this.dataset.id);
+// ------ MAIN -------
+window.addEventListener('click', function() {  
+  for(var j=0; j<allBlocks.length; j++) {
+  if(allBlocks[j].children[4].style.display == 'flex') {
+    allBlocks[j].children[4].style.display = 'none';
+  }}
+})
+var allBlocks = document.querySelectorAll('.block');
+allBlocks.forEach((el) => el.addEventListener('click', function (e) {
+  e.stopPropagation();
+  for(var j=0; j<allBlocks.length; j++) {
+    if(allBlocks[j].children[4].style.display == 'flex') {
+      allBlocks[j].children[4].style.display = 'none';
+    }
+  }
+  //_overlay(this.dataset.id);
+  //this.classList.toggle("selected")
+  var divList = this.children;
+  for(var i=0; i< this.children.length; i++) {
+    if(this.children[i].outerText == "combat !") {
+      var blockOverlay = this.children[i];
+      break;
+    }
+  }
+
+
+  if(blockOverlay.style.display == 'none' || blockOverlay.style.display == '' ) {
+    blockOverlay.style.display = 'flex';
+  }else {
+    blockOverlay.style.display = 'none';
+  }
+
+
+
+
 }));
 document.querySelector('.cross').addEventListener('click', function () {
   _overlay()
 });
+
+
+
+
+
 
 
 //----- GOOGLE TABLE IN OVERLAY

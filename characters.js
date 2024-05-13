@@ -33,12 +33,12 @@ const clovisI = new Character({
               {role: 'mother', name: 'Basine de Thuringe', sexe: 'f'},
               {role: 'spouse', name: 'Evochilde', sexe: 'f'},
               {role: 'spouse', name: 'Clotilde', sexe: 'f'},
-              {role: 'issue', name: 'Thierry I', sexe: 'm', heir: true},
-              {role: 'issue', name: 'Ingomer', sexe: 'm', heir: false},
-              {role: 'issue', name: 'Clodomir', sexe: 'm', heir: true},
-              {role: 'issue', name: 'Childebert I', sexe: 'm', heir: true},
-              {role: 'issue', name: 'Clotaire I', sexe: 'm', heir: true},
-              {role: 'issue', name: 'Clotilde', sexe: 'f', heir: false},
+              {role: 'issue', name: 'Thierry I', sexe: 'm'},
+              {role: 'issue', name: 'Ingomer', sexe: 'm'},
+              {role: 'issue', name: 'Clodomir', sexe: 'm'},
+              {role: 'issue', name: 'Childebert I', sexe: 'm'},
+              {role: 'issue', name: 'Clotaire I', sexe: 'm'},
+              {role: 'issue', name: 'Clotilde', sexe: 'f'},
             ],
     title: {id:'king', label:''},
     dynasty: {id:'merovingian', label: 'Mérovingiens'},
@@ -59,8 +59,8 @@ const thierryI = new Character({
   family: [ {role: 'father', name: 'Clovis', sexe: 'm'},
             {role: 'mother', name: 'Evochilde', sexe: 'f'},
             {role: 'spouse', name: 'Suavegothe', sexe: 'f'},
-            {role: 'issue', name: 'Thibert I', sexe: 'm', heir: true},
-            {role: 'issue', name: 'Théodechilde', sexe: 'f', heir: false},
+            {role: 'issue', name: 'Thibert I', sexe: 'm'},
+            {role: 'issue', name: 'Théodechilde', sexe: 'f'},
           ],
   title: {id:'king', label:''},
   dynasty: {id:'merovingian', label: 'Mérovingiens'},
@@ -78,9 +78,9 @@ const clodomir = new Character({
   family: [ {role: 'father', name: 'Clovis', sexe: 'm'},
             {role: 'mother', name: 'Clotilde', sexe: 'f'},
             {role: 'spouse', name: 'Gondioque', sexe: 'f'},
-            {role: 'issue', name: 'Thibaut', sexe: 'm', heir: false},
-            {role: 'issue', name: 'Gontier', sexe: 'm', heir: false},
-            {role: 'issue', name: 'Clodoald', sexe: 'm', heir: false},
+            {role: 'issue', name: 'Thibaut', sexe: 'm'},
+            {role: 'issue', name: 'Gontier', sexe: 'm'},
+            {role: 'issue', name: 'Clodoald', sexe: 'm'},
           ],
   title: {id:'king', label:''},
   dynasty: {id:'merovingian', label: 'Mérovingiens'},
@@ -88,9 +88,31 @@ const clodomir = new Character({
   avatar: '/images/clodomirI.png',
   death: {location: 'Vézeronce', cause: 'Guerre contre les Burgondes'},
 })
+//////////////////// CHILDEBERT I ///////////////////////
+const childebertI = new Character({ 
+  sexe: 'm',
+  heir: true,
+  name: 'Childebert 1<sup style="font-size:0.9rem;margin-left:2px">er</sup>', 
+  livePeriod: [497, 558],
+  reignPeriod: [{title: "Roi de Paris", date: [511, 558]},
+                {title: "Roi d'Orléans 1/3", date: [524, 558]},
+              ], 
+  family: [ {role: 'father', name: 'Clovis', sexe: 'm'},
+            {role: 'mother', name: 'Clotilde', sexe: 'f'},
+            {role: 'spouse', name: 'Ultrogothe', sexe: 'f'},
+            {role: 'issue', name: '', sexe: 'f'},
+            {role: 'issue', name: 'Gontier', sexe: 'f'},
+
+          ],
+  title: {id:'king', label:''},
+  dynasty: {id:'merovingian', label: 'Mérovingiens'},
+  religion: {id: 'christianism', label: 'Chrétien'},
+  avatar: '/images/childebertI.png',
+  death: {location: 'Paris', cause: 'Mort naturelle'},
+})
 
 const characters = [
-  clovisI,thierryI, clodomir
+  clovisI, thierryI, clodomir, childebertI,
 ];
 
 
