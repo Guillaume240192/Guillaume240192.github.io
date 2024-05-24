@@ -1,7 +1,12 @@
 import {characters} from "/characters.js";
 import {parameters} from "/parameters.js";
 
-// ------ CONTAINER -------
+// GLOBAL VARIABLE
+var intervals = [];
+
+// *
+// ------ CONTAINER FUNCTIONS -------
+// *
 function playAudio() {
   var audio = document.getElementById("mouse-click");
   audio.play();
@@ -20,6 +25,33 @@ function createBlock(char,id) {
   block.style.borderRadius = param.borderRadius;
   block.style.borderWidth = param.borderWidth;
   block.style.transform = `rotate(${param.rotationAngle+'deg'})`;
+  block.addEventListener('click',function(e) {
+    e.stopPropagation();
+    for(var j=0; j<allBlocks.length; j++) {
+      for(var k=0; k<allBlocks[j].children.length; k++) {
+        if(allBlocks[j].children[k].outerText == "combat !") {
+          if(allBlocks[j].children[k].style.display == 'flex') {
+            allBlocks[j].children[k].style.display = 'none';
+          }
+        }
+      }
+    }
+    
+    //this.classList.toggle("selected")
+    var divList = this.children;
+    for(var i=0; i< this.children.length; i++) {
+      if(this.children[i].outerText == "combat !") {
+        var blockOverlay = this.children[i];
+        break;
+      }
+    }
+  
+    if(blockOverlay.style.display == 'none' || blockOverlay.style.display == '' ) {
+      blockOverlay.style.display = 'flex';
+    }else {
+      blockOverlay.style.display = 'none';
+    }
+  })
 
   // BLOCKHEADER DIV
   const blockHeader = document.createElement('div');
@@ -91,7 +123,7 @@ function createBlock(char,id) {
   blockOverlay.style.borderRadius = param.borderRadius;
   blockOverlay.style.borderWidth = param.borderWidth;
   blockOverlay.addEventListener('click', function () {
-    _overlay();
+    _overlay(id);
   });
     // Double Axes DIV
     const doubleAxes = document.createElement('div');
@@ -120,10 +152,124 @@ function createBlock(char,id) {
   divs.forEach((el) => {el.style.transform = `rotate(${-1*param.rotationAngle+'deg'})`;})
   //console.log(divs)
 }
+// *
+// ------ OVERLAY FUNCTIONS ------
+// *
+function playFight(id) {
+  var randomNb = getRandomInt(10);
+  var param = parameters.boxes[randomNb];
 
-characters.forEach((char,i) => {createBlock(char,i)});
+  const modal_div = document.getElementById("modal");
 
-// ------  OVERLAY ------
+  // MY CHARACTER
+  const char = characters[id];
+  // SELECT RANDOM ENEMY
+  const enemies = JSON.parse(JSON.stringify(characters)); // DEEP COPY
+  enemies.splice(id,1); // rid off the selected character
+  const enemy = enemies[(Math.floor(Math.random() * enemies.length))];
+
+
+  function _displayHead(id, life) {
+    // FACE DIV
+    const face_div = document.createElement('div');
+    face_div.classList.add('modalFace');
+    face_div.style.borderRadius = param.face.borderRadius;
+    face_div.style.borderWidth = param.face.borderWidth;
+    face_div.style.backgroundImage = `url(${id.avatar})`;
+    // LIFEBAR DIV
+    const lifeBar_div = document.createElement('div');
+    lifeBar_div.classList.add('modalLifeBar');
+    lifeBar_div.style.borderWidth = param.face.borderWidth;
+    // LIFE DIV
+    const life_div = document.createElement('div');
+    life_div.classList.add('modalLife');
+    life_div.style.width = id.life+'px';
+    // APPEND
+    const _div = document.createElement('div');
+    lifeBar_div.appendChild(life_div);
+    _div.appendChild(lifeBar_div);
+    _div.appendChild(face_div);
+
+    return _div;
+  }
+
+
+  // initialize life 180px (100%)
+  char.life = 180;
+  enemy.life = 180;
+
+  // HEADERS DIV
+  const headers_div = document.createElement('div');
+  headers_div.id = "headers_div";
+      // CHAR DIV
+      const char_div = _displayHead(char)
+      char_div.id = "char_div";
+      char_div.classList.add('charHeader');
+
+      // DOUBLE AXE
+      const doubleAxes_div = document.createElement('div');
+      doubleAxes_div.classList.add('axesHeader');
+
+      // ENEMY DIV
+      const enemy_div = _displayHead(enemy);
+      enemy_div.id = "enemy_div";
+      enemy_div.classList.add('enemyHeader'); 
+
+
+  // FIGHT DIV
+  const fight_div = document.createElement('div');
+  fight_div.id = "fight_div";
+  fight_div.innerHTML = "<u>Combat en cours :</u>";
+
+  // APPEND 
+  headers_div.appendChild(char_div);
+  headers_div.appendChild(doubleAxes_div);
+  headers_div.appendChild(enemy_div);
+  modal_div.appendChild(headers_div);
+  modal_div.appendChild(fight_div);
+
+  //SET TIMER
+  function _attack(randomNb, char, enemy) {
+    const myAttack = parameters.attacks[(Math.floor(Math.random() * parameters.attacks.length))];
+    const attack_p = document.createElement('p');
+    if(randomNb <= 0.5) {
+      var opponent1 = char;
+      var opponent2 = enemy;
+      attack_p.style.color = "rgba(5, 89, 5, 1)";
+    } else {
+      var opponent1 = enemy;
+      var opponent2 = char;
+      attack_p.style.color = "red";
+    }
+    attack_p.innerHTML = `${opponent1.name} : ${myAttack.lib}`;
+    fight_div.appendChild(attack_p);
+    opponent2.life -= myAttack.damage;
+    opponent2.life = opponent2.life < 0 ? 0 : opponent2.life;
+
+    // update life
+    if(randomNb <= 0.5) {
+      var life_div = enemy_div.querySelector('.modalLife');
+      life_div.style.width = opponent2.life + 'px';
+    } else {
+      var life_div = char_div.querySelector('.modalLife');
+      life_div.style.width = opponent2.life + 'px';
+    }
+
+    // if dead
+    if(opponent2.life <= 0) {
+      const winner_p = document.createElement('p');
+      winner_p.innerHTML = `${opponent1.name} est victorieux !`;
+      winner_p.style.fontWeight = "bold";
+      winner_p.style.textAlign = "center";
+      fight_div.appendChild(winner_p);
+      clearInterval(mySetTimeInterval);
+    }
+  }
+
+  var mySetTimeInterval = setInterval(function() {_attack(Math.random(),char,enemy)}, 2000);
+  intervals.push(mySetTimeInterval);
+  }
+
 function _overlay(id) {
   const overlay_div = document.getElementById("overlay");
   const modal_div = document.getElementById("modal");
@@ -135,51 +281,39 @@ function _overlay(id) {
     overlay_div.style.display = "block";
     modal_div.style.display = "block";
   }
+  
   //console.log(id)
   playAudio();
+  // if cancel button we quit
+  if(id == undefined) {
+    // clear data
+    var headers_div = document.getElementById("headers_div");
+    var fight_div = document.getElementById("fight_div");
+    headers_div.remove();
+    fight_div.remove();
+    intervals.forEach(clearInterval);
+     return
+  }
+  // else we fight
+  playFight(id);
+  
 }
 
+
 // ------ MAIN -------
+  // create all blocks from characters
+characters.forEach((char,i) => {createBlock(char,i)});
+
+var allBlocks = document.querySelectorAll('.block');
 window.addEventListener('click', function() {  
   for(var j=0; j<allBlocks.length; j++) {
   if(allBlocks[j].children[4].style.display == 'flex') {
     allBlocks[j].children[4].style.display = 'none';
   }}
 })
-var allBlocks = document.querySelectorAll('.block');
-allBlocks.forEach((el) => el.addEventListener('click', function (e) {
-  e.stopPropagation();
-  for(var j=0; j<allBlocks.length; j++) {
-    if(allBlocks[j].children[4].style.display == 'flex') {
-      allBlocks[j].children[4].style.display = 'none';
-    }
-  }
-  //_overlay(this.dataset.id);
-  //this.classList.toggle("selected")
-  var divList = this.children;
-  for(var i=0; i< this.children.length; i++) {
-    if(this.children[i].outerText == "combat !") {
-      var blockOverlay = this.children[i];
-      break;
-    }
-  }
-
-
-  if(blockOverlay.style.display == 'none' || blockOverlay.style.display == '' ) {
-    blockOverlay.style.display = 'flex';
-  }else {
-    blockOverlay.style.display = 'none';
-  }
-
-
-
-
-}));
 document.querySelector('.cross').addEventListener('click', function () {
   _overlay()
 });
-
-
 
 
 

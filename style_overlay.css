@@ -25,6 +25,7 @@
     border-width: 3px 2px 4px 3px;
     border-radius: 98% 2% 98% 2% / 3% 98% 2% 97%;
     z-index: 3;
+    overflow: auto;
 }
     .cross {
         /*border: 1px solid black;*/
@@ -39,6 +40,79 @@
         background-position: center;
         cursor: pointer; /* Add a pointer on hover */
     }
+    /* ---- HEADERS ---- */
+    #headers_div {
+        display: flex;
+        justify-content: space-between;
+        margin: 4rem 6rem;
+        /*transition: transform 1s ease-in 1s;*/
+    }
+    .charHeader {
+        display: flex;
+        flex-direction: row-reverse;
+        /*transform: translateX(-150px);*/
+    }
+    .axesHeader {
+        width: 125px;
+        aspect-ratio: 1;
+        background-image: url('/images/doubleAxes.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+
+    }
+    .enemyHeader {
+        display: flex;
+    }
+    .modalFace {
+        width : 125px;
+        aspect-ratio: 1;
+        border-color: black;
+        border-style: solid;
+        background-color: #ffffff;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }   
+    .modalLifeBar {
+        width : 180px;
+        height: 30px;
+        border-color: black;
+        border-style: solid;
+        border-radius: 98% 2% 99% 1% / 2% 98% 2% 98% ;
+        background-color: #eadd94;
+        margin-top: 3rem;
+    }   
+    .modalLife {
+        height: 30px;
+        background-color: rgba(5, 89, 5, 1);
+        transition: width 1s;
+        
+    }   
+    /* ---- FiGHT ---- */   
+    #fight_div {
+        padding: 0.5rem;
+        margin: 0.5rem 1rem;
+        border: 1px dashed black;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* google table */
     #mainTable_div {
         display: none;
         width: 80%;

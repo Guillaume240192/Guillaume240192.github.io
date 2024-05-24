@@ -99,12 +99,28 @@ const box10 = {
 }
 
 const boxes = [box1,box2,box3,box4,box5,box6,box7,box8,box9,box10];
-  
+const attacks = [
+    {lib:`Donne un grand coup de pied dans les roubignolles !`, damage: 40},
+    {lib:`Attrape la barbe et tire son adversaire sur 150 m.`, damage: 15},
+    {lib:`Assène un coup d'épée dans le thorax.`, damage: 70},
+    {lib:`Transperce avec sa lance l'épaule.`, damage: 30},
+    {lib:`Tranche la tête de son adversaire qui refaisait ses lacets.`, damage: 180},
+    {lib:`Insulte son adversaire de petit sac à fiente !`, damage: 0},
+    {lib:`Souhaite se rendre en tendant la main, mais son adversaire lui la coupe.`, damage: 70},
+    {lib:`Danse autour de son adversaire pensant que ceci l'ensorcellerait.`, damage: 0},
+    {lib:`Humilie son adversaire en urinant sur ses bottines.`, damage: 5},
+    {lib:`Transperce avec sa lance la jambe.`, damage: 40},
+    {lib:`Jette un caillou.`, damage: 2},
+    {lib:`Donne un coup d'épée mais l'adversaire s'oppose avec son bouclier`, damage: 0},
+    {lib:`Grille le visage`, damage: 3},
+]
+
 var parameters = {};
 parameters['titleIcon'] = titleIcon;
 parameters['dynastyIcon'] = dynastyIcon;
 parameters['religionIcon'] = religionIcon;
 parameters['boxes'] = boxes;
+parameters['attacks'] = attacks;
 
 
 export {parameters};
